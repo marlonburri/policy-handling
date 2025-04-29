@@ -1,0 +1,12 @@
+az deployment group create \
+    --name "policy-deployment" \
+    --resource-group "rg-demo-policy-exemption" \
+    --template-file "storage.bicep"
+
+ASSIGNMENT_ID='/subscriptions/b33f0285-db27-4896-ac5c-df22004b0aba/resourcegroups/rg-demo-policy-exemption/providers/Microsoft.Authorization/policyAssignments/Storage account disable public network access'
+
+az deployment group create \
+    --name "policy-exemption-deployment" \
+    --resource-group "rg-demo-policy-exemption" \
+    --template-file "exemption.bicep" \
+    --parameters policyAssignmentId="$ASSIGNMENT_ID"

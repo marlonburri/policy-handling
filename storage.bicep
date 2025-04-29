@@ -12,9 +12,11 @@ module storageAccount 'br/public:avm/res/storage/storage-account:0.19.0' = {
   }
 }
 
-resource policAssignment 'Microsoft.Authorization/policyAssignments@2025-03-01' = {
+resource policAssignment 'Microsoft.Authorization/policyAssignments@2025-01-01' = {
   name: 'Storage account disable public network access'
   properties: {
+    #disable-next-line use-resource-id-functions
+    policyDefinitionId: policyToAssign
     parameters: {
       effect: { value: 'Audit' }
     }
